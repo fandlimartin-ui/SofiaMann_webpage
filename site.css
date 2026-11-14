@@ -1,0 +1,347 @@
+/* Page CSS for the portfolio. Everything else comes from the Taste Skill kit in /assets
+   (system.css: tokens, grid, sections, nav, buttons, footer; layout.css: the hero; motion.css: hover). */
+
+/* ---------- Photograph rows: one height per row, every photograph in its own proportions ---------- */
+.prows { display: grid; gap: var(--s-5); }
+.prow { display: flex; gap: var(--s-5); align-items: flex-start; }
+.pgroup { display: contents; }
+.ph {
+  /* grow in proportion to width/height (x100, so a lone photograph still fills its line) */
+  flex: var(--g) 1 0; min-width: 0; aspect-ratio: var(--ar);
+  display: block; padding: 0; border: 0; margin: 0; background: none; color: inherit;
+  border-radius: var(--r-md); cursor: zoom-in;
+}
+.ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ph:focus-visible { outline: 2px solid var(--action); outline-offset: 3px; }
+
+@media (max-width: 639px) {
+  .prows, .prow { gap: var(--s-3); }
+  .prow { flex-direction: column; align-items: stretch; }
+  .pgroup { display: flex; gap: var(--s-3); align-items: flex-start; }
+  /* three portraits in a group: two side by side, the third the full width under them */
+  .pgroup:has(> :nth-child(3)) { display: grid; grid-template-columns: 1fr 1fr; }
+  .pgroup:has(> :nth-child(3)) > :nth-child(3) { grid-column: 1 / -1; }
+  /* the photo sections run as long as their photographs on a phone (at least one screen) */
+  main > section.g2#portfolio, main > section.g2#editorial { height: auto; min-height: 100lvh; }
+  main > section.g2#portfolio > .wrap, main > section.g2#editorial > .wrap { display: flex; flex-direction: column; gap: var(--s-3); }
+  #about .about .rows > li { grid-template-columns: minmax(0, 1fr); gap: var(--s-1); }
+  #about .about .rows > li > :is(.rows__name, .rows__value) { grid-column: 1; grid-row: auto; text-align: left; justify-self: start; }
+  /* About runs as long as its words and portrait on a phone (at least one screen) */
+  main > section#about { height: auto; min-height: 100lvh; }
+}
+
+/* ---------- Photo sections run as long as their photographs ----------
+   The kit sizes every section to whole window heights. Photo rows are sized by the window's width,
+   so on a tall window that left half of each screen empty. Here the photo sections take the height
+   of what they hold, with the same top and bottom padding as every other section (client decision,
+   recorded in .taste-skill). */
+main > section.g2#portfolio, main > section.g2#editorial { height: auto; min-height: 0; }
+main > section.gallery { height: auto; min-height: 0; }
+main > section.gallery .section-head { margin-bottom: var(--s-7); }
+main > section.g2#portfolio > .wrap, main > section.g2#editorial > .wrap {
+  display: flex; flex-direction: column; gap: var(--s-5); row-gap: var(--s-5); height: auto;
+}
+/* The client chapters stand static below 1024px (the moment pins only on larger screens): two screens there. */
+@media (max-width: 1023px) {
+  main > section#clients:not(.is-live) { height: auto; min-height: 0; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  #clients:not(.is-live) .mo-pc__visual > img { aspect-ratio: 3 / 4; max-height: 44svh; }
+}
+
+
+/* ---------- Hero ---------- */
+/* The landing: name and booking over the photo grid. It runs as long as the grid (the first row
+   fills the rest of the first screen on a desktop). */
+main > section.hero.hero--mosaic {
+  height: auto; min-height: 0;
+  padding: calc(var(--nav) + var(--s-7)) 0 var(--padb);
+}
+.hero--mosaic .landing__head { display: grid; gap: var(--s-5); margin-bottom: var(--s-7); }
+.hero--mosaic h1 { margin: 0; font-size: clamp(44px, 11vw, 64px); line-height: .95; letter-spacing: -0.02em; }
+.hero--mosaic .landing__name { display: block; }
+.hero--mosaic .landing__comma { display: none; }
+.hero--mosaic .landing__role { display: block; margin-top: .3em; font-size: .42em; line-height: 1.1; color: var(--muted); letter-spacing: 0; }
+.hero--mosaic .hero__lead { margin: 0 0 var(--s-5); max-width: 42ch; }
+
+/* ---------- Client chapters (pinned-chapters moment) ---------- */
+#clients .mo-pc__steps { gap: var(--s-5); }
+@media (min-width: 1024px) { main > section#clients h2 { font-size: clamp(40px, 3.4vw, 56px); } }
+#clients .chapter { gap: var(--s-3); padding-left: var(--s-6); }
+.chapter__kicker {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-4);
+  font: 500 var(--t-label)/1.4 var(--font-text); letter-spacing: 0.02em; color: var(--muted);
+}
+.chapter__num { font-variant-numeric: tabular-nums; color: var(--ink); }
+.chapter__count::before { content: "·"; margin-right: var(--s-4); }
+#clients .mo-pc__step h3.chapter__name {
+  margin: 0; font-family: var(--font-display); font-weight: var(--display-weight);
+  font-size: clamp(36px, 3.4vw, 52px); line-height: 1; letter-spacing: -0.015em;
+}
+#clients .mo-pc__step p { margin: 0; }
+.chapter__more-in { display: grid; gap: var(--s-3); justify-items: start; }
+.chapter__thumbs { display: flex; gap: var(--s-2); margin-top: var(--s-3); }
+.chapter__thumbs .ph { flex: none; width: 68px; aspect-ratio: 4 / 5; border-radius: var(--r-sm); }
+.chapter__thumbs .ph img { object-fit: cover; }
+/* live (pinned, desktop): the open chapter shows its lines, thumbnails and link; the others fold to
+   their number and name, the way the moment folds its lines */
+#clients.is-live .chapter .chapter__more {
+  display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden;
+  transition: grid-template-rows 420ms cubic-bezier(.2, .7, .2, 1), opacity 300ms ease, visibility 0s linear 420ms;
+}
+#clients.is-live .chapter.is-on .chapter__more { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition-delay: 0s; }
+#clients.is-live .chapter .chapter__more-in { min-height: 0; overflow: hidden; }
+#clients.is-live .chapter.is-on .chapter__num { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { #clients.is-live .chapter .chapter__more { transition: none; } }
+/* a short desktop screen keeps the pinned list inside the screen: the thumbnails step out */
+@media (max-height: 820px) { #clients.is-live .chapter__thumbs { display: none; } }
+.mo-pc__step .chapter__open {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0;
+  background: none; font: inherit; font-size: var(--t-body); color: var(--ink); cursor: pointer;
+}
+.mo-pc__visual img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Client chapters, live (pinned) ----------
+   Top-aligned like every other section: the h2 sits --padt under the section's top, not centred. */
+main #clients.is-live > .mo-pc__grid { align-content: start; padding-top: var(--padt); }
+/* system.css lets a section's .wrap grow (flex: 1 0 auto) from 640 to 1279px; the pinned grid must
+   stay one screen tall or it has nothing to stick with and the section's second screen shows empty */
+main > section#clients.is-live > .mo-pc__grid { flex: none; height: 100svh; }
+/* the pinned picture fills the screen's height beside the chapters, not a small 4:3 box */
+main > section#clients.is-live .mo-pc__visuals {
+  aspect-ratio: auto; height: calc(100svh - var(--padt) - var(--padb)); max-height: none; border-radius: var(--r-lg);
+}
+
+/* ---------- Statement (word-highlight moment) ---------- */
+.statement__grid { height: 100%; align-items: stretch; }
+.statement__text { display: flex; flex-direction: column; justify-content: space-between; gap: var(--s-7); }
+.statement__photo { min-height: 0; border-radius: var(--r-lg); }
+@media (max-width: 1023px) {
+  #statement .grid.fill.statement__grid { display: flex; flex-direction: column; height: auto; flex: none; }
+  #statement .grid.fill > .statement__photo { height: auto; aspect-ratio: 4 / 5; flex: none; min-height: 0; margin-top: var(--s-7); }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  #statement .grid.fill > .statement__photo { aspect-ratio: auto; height: 44svh; }
+}
+@media (max-width: 639px) {
+  main > section#statement { height: auto; min-height: 100lvh; }
+}
+.statement__label { margin: 0; font: 500 var(--t-label)/1.4 var(--font-text); letter-spacing: 0.01em; color: var(--muted); }
+.statement .mo-wh__text {
+  font-family: var(--font-display); font-weight: var(--display-weight);
+  font-size: clamp(30px, 3.4vw + 8px, 60px); line-height: 1.12; letter-spacing: var(--display-tracking);
+  max-width: 22ch; margin: 0; text-wrap: balance;
+}
+
+/* ---------- About ---------- */
+.about { align-items: stretch; height: 100%; }
+.about__text { display: grid; align-content: start; gap: var(--s-6); }
+.about__text > h2 { margin: 0; }
+.about__text > .t-lead { margin: 0; max-width: 44ch; }
+.about__photo { min-height: 0; border-radius: var(--r-lg); }
+@media (max-width: 1023px) {
+  #about .about.grid { display: flex; flex-direction: column; height: auto; flex: none; }
+  #about .grid.fill > .about__photo { height: auto; aspect-ratio: 3 / 4; flex: none; min-height: 0; margin-top: var(--s-7); }
+}
+
+/* ---------- Ornamental divider between the light sections ----------
+   It sits in the space the two sections already leave (their bottom and top padding), so the page's
+   rhythm stays the same; it is drawn above both grounds. */
+main > .divider {
+  position: relative; z-index: 2; display: flex; justify-content: center;
+  height: 56px; margin: 0 auto calc(var(--padb) - var(--padt)); pointer-events: none;
+  color: color-mix(in oklab, var(--ink) 55%, var(--bg));
+}
+main > .divider svg { width: min(420px, 70vw); height: auto; display: block; }
+
+/* ---------- Booking: who to write to on the left, the form in a card on the right ---------- */
+main > section.booking { height: auto; min-height: 0; padding-bottom: var(--s-9); }
+main > section.booking > .wrap.booking__grid { display: grid; gap: var(--s-8); align-items: start; height: auto; }
+.booking__intro { display: grid; gap: var(--s-5); align-content: start; }
+.booking__intro h2 { margin: 0; }
+.booking__lead { margin: 0; max-width: 40ch; font-size: var(--t-lead); line-height: 1.5; color: var(--muted); }
+.booking__lines { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s-3); }
+.booking__lines li { display: flex; align-items: center; gap: var(--s-3); }
+.booking__lines a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-weight: 500; text-decoration: none; }
+@media (hover: hover) and (pointer: fine) { .booking__lines a:hover { text-decoration: underline; text-underline-offset: 4px; } }
+.booking__muted { color: var(--muted); font-size: var(--t-small); }
+
+.booking__card {
+  display: flex; align-items: center; gap: var(--s-5); margin-top: var(--s-4); max-width: 420px;
+  padding: var(--s-4) var(--s-6) var(--s-4) var(--s-4);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 22px;
+}
+.booking__card-photo {
+  flex: none; width: 92px; height: 116px; padding: 4px; background: var(--bg);
+  border-radius: 12px; rotate: -4deg; box-shadow: 0 10px 24px rgba(0, 0, 0, .35); overflow: hidden;
+}
+.booking__card-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 9px; display: block; }
+.booking__card-text { display: grid; gap: var(--s-1); min-width: 0; }
+.booking__card-name { margin: 0; font-family: var(--font-display); font-size: 24px; line-height: 1.1; color: var(--ink); }
+.booking__card-role { margin: 0 0 var(--s-2); font-size: var(--t-small); color: var(--muted); }
+.booking__card-row { display: inline-flex; align-items: center; gap: var(--s-3); min-height: 40px; color: var(--ink); font-weight: 500; text-decoration: none; overflow-wrap: anywhere; }
+.booking__card-icon {
+  flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--ink); color: var(--bg);
+}
+
+.booking__form-card {
+  padding: var(--s-6); background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
+}
+.booking-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-4); }
+.booking-form > .field--full, .booking-form > .booking-form__foot, .booking-form > .booking-form__status { grid-column: 1 / -1; }
+.booking-form { --error: #f0a59c; }
+.booking-form .field label { color: var(--ink); }
+.booking-form .field label > span[aria-hidden] { color: #d9a48c; }
+.booking-form .field :is(input, textarea) {
+  border-radius: 12px; border: 1px solid color-mix(in oklab, var(--ink) 28%, transparent); background: color-mix(in oklab, var(--bg) 70%, var(--surface));
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+.booking-form .field :is(input, textarea):focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px color-mix(in oklab, var(--ink) 18%, transparent); }
+.booking-form .field textarea { min-height: 140px; }
+.booking-form .field textarea::placeholder { color: color-mix(in oklab, var(--ink) 45%, transparent); }
+.booking-form .field :is(input, textarea)[aria-invalid="true"] { border: 2px solid var(--error); }
+.booking-form .field__error::before { color: #1c1714; }
+.booking-form .check { display: flex; align-items: flex-start; gap: var(--s-3); font-weight: 400; color: var(--muted); cursor: pointer; }
+.booking-form .check input { flex: none; width: 20px; height: 20px; margin: 2px 0 0; accent-color: #efebe5; }
+.booking-form__foot { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); flex-wrap: wrap; margin-top: var(--s-2); }
+.booking-form__req { font-size: var(--t-small); color: var(--muted); }
+.booking-form__status { margin: 0; min-height: 1.5em; font-size: var(--t-small); color: var(--muted); }
+.booking-form__status.is-sent { color: var(--ink); }
+.booking-form__trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+@media (max-width: 639px) {
+  .booking-form { grid-template-columns: minmax(0, 1fr); }
+  .booking__form-card { padding: var(--s-5); }
+  .booking-form__foot .btn { width: 100%; }
+}
+@media (min-width: 1024px) {
+  main > section.booking > .wrap.booking__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-9); }
+  .booking__form-card { padding: var(--s-7); }
+}
+
+/* the footer runs as long as it holds */
+footer.closing { height: auto; min-height: 0; }
+
+/* ---------- Footer ---------- */
+.footer .nav__logo .mark--initial { width: 24px; height: 24px; font-size: 14px; line-height: 1; }
+.footer__social { display: inline-flex; align-items: center; gap: var(--s-3); }
+.footer__social svg { flex: none; }
+.footer__email { overflow-wrap: anywhere; }
+
+/* ---------- Full-screen viewer ---------- */
+html.lb-open { overflow: hidden; }
+.lb {
+  --lb-bg: #120e0c; --lb-ink: #efebe5; --lb-muted: #a59c94;
+  position: fixed; inset: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; background: var(--lb-bg); color: var(--lb-ink);
+  display: grid; grid-template-rows: auto minmax(0, 1fr); overscroll-behavior: contain;
+}
+.lb:not([open]) { display: none; }
+.lb::backdrop { background: var(--lb-bg); }
+.lb[open] { animation: lb-in 320ms var(--m-ease-enter, cubic-bezier(.22,1,.36,1)) both; }
+.lb.is-closing { animation: lb-out 220ms ease both; }
+@keyframes lb-in { from { opacity: 0; } }
+@keyframes lb-out { to { opacity: 0; } }
+
+.lb__bar {
+  display: flex; align-items: center; gap: var(--s-5);
+  padding: var(--s-4) max(var(--s-5), env(safe-area-inset-right)) var(--s-4) max(var(--s-5), env(safe-area-inset-left));
+  min-height: 72px;
+}
+.lb__title { margin: 0; flex: 1; min-width: 0; font-size: var(--t-small); color: var(--lb-ink); display: flex; gap: var(--s-4); flex-wrap: wrap; }
+.lb__credit { color: var(--lb-muted); }
+.lb__count { margin: 0; font-size: var(--t-small); color: var(--lb-muted); font-variant-numeric: tabular-nums; }
+
+.lb__stage {
+  position: relative; min-height: 0; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 clamp(var(--s-4), 6vw, 112px) clamp(var(--s-4), 3vw, var(--s-7));
+  touch-action: pan-y; user-select: none;
+}
+.lb__img {
+  max-width: 100%; max-height: 100%; width: auto; height: auto; min-width: 0; min-height: 0; object-fit: contain; flex: none;
+  border-radius: var(--r-sm);
+  transition: transform 260ms var(--ease, ease);
+  animation: lb-photo 520ms var(--m-ease-enter, cubic-bezier(.22,1,.36,1)) both;
+}
+.lb__img--prev { --from: -28px; }
+@keyframes lb-photo { from { opacity: 0; transform: translateX(var(--from, 28px)) scale(.985); } }
+
+.lb__btn {
+  display: grid; place-items: center; width: 48px; height: 48px; padding: 0;
+  border: 1px solid color-mix(in oklab, var(--lb-ink) 22%, transparent); border-radius: 999px;
+  background: color-mix(in oklab, var(--lb-bg) 70%, transparent); color: var(--lb-ink); cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+.lb__btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.lb__btn:focus-visible { outline: 2px solid var(--lb-ink); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .lb__btn:hover { background: color-mix(in oklab, var(--lb-ink) 12%, var(--lb-bg)); border-color: color-mix(in oklab, var(--lb-ink) 45%, transparent); }
+}
+.lb__prev, .lb__next { position: absolute; top: 50%; translate: 0 -50%; }
+.lb__prev { left: max(var(--s-5), env(safe-area-inset-left)); }
+.lb__next { right: max(var(--s-5), env(safe-area-inset-right)); }
+
+@media (max-width: 639px) {
+  .lb { grid-template-rows: auto minmax(0, 1fr) auto; grid-template-columns: minmax(0, 1fr); }
+  .lb__bar { grid-row: 1; grid-column: 1; }
+  .lb__stage { grid-row: 2; grid-column: 1; }
+  .lb__prev, .lb__next { grid-column: 1; }
+  .lb__stage { padding: 0 0 var(--s-3); }
+  .lb__img { border-radius: 0; }
+  .lb__prev, .lb__next { position: static; translate: none; }
+  .lb__prev { grid-row: 3; justify-self: start; margin: 0 0 max(var(--s-5), env(safe-area-inset-bottom)) var(--s-5); }
+  .lb__next { grid-row: 3; justify-self: end; margin: 0 var(--s-5) max(var(--s-5), env(safe-area-inset-bottom)) 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lb[open], .lb.is-closing, .lb__img { animation: none; }
+  .lb__img { transition: none; }
+}
+
+
+/* =====================================================================================
+   DESKTOP EDITION (1024px and wider)
+   Phones and tablets keep the layout above. On a desktop the page becomes a full-screen
+   editorial: the hero photograph fills the screen with the name set large over it, photographs
+   go square-cornered with tight gutters like a magazine spread, and headings grow.
+   ===================================================================================== */
+@media (min-width: 1024px) {
+  /* ---- Landing: the name large on the left, the words and buttons on the right ---- */
+  main > section.hero.hero--mosaic { padding-top: calc(var(--nav) + var(--s-6)); }
+  .hero--mosaic .landing__head {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 460px); column-gap: var(--s-8);
+    align-items: end; margin-bottom: var(--s-5);
+  }
+  .hero--mosaic h1 { font-size: clamp(76px, 8.4vw, 150px); line-height: .88; }
+  .hero--mosaic .landing__role { font-size: .3em; }
+  .hero--mosaic .hero__lead { margin-bottom: var(--s-5); }
+  .hero--mosaic .landing__side .btn-row { flex-wrap: nowrap; }
+  /* the photographs open the page; the name, words and buttons follow under the grid, before the
+     metro editorial (the markup keeps the name first for screen readers and search) */
+  main > section.hero.hero--mosaic > .wrap { display: flex; flex-direction: column; }
+  .hero--mosaic .hero__mosaic { order: 1; }
+  .hero--mosaic .landing__head { order: 2; margin: var(--s-9) 0 0; }
+
+  /* ---- Magazine spreads: square photographs, tight gutters, larger headings ---- */
+  .prows, .prow { gap: 12px; }
+  .ph, .ph img, .about__photo, .statement__photo, main > section#clients.is-live .mo-pc__visuals,
+  [data-moment="pinned-chapters"] .mo-pc__visual { border-radius: 0; }
+  main > section:not(.hero) h2 { font-size: clamp(48px, 4.2vw, 72px); line-height: 1; letter-spacing: -0.015em; }
+  #portfolio .section-head, #editorial .section-head { margin-bottom: var(--s-7); }
+
+  /* ---- Close: the name set across the page, the way a magazine signs off ---- */
+  footer.closing { height: auto; min-height: 0; }
+  .closing__word {
+    margin: var(--s-8) 0 0; font-family: var(--font-display); font-weight: 400; color: var(--ink);
+    font-size: clamp(96px, 13.6vw, 236px); line-height: .8; letter-spacing: -0.03em; white-space: nowrap;
+  }
+}
+@media (max-width: 1023px) {
+  .closing__word { display: none; }
+  /* the top row only holds the large name on a desktop: below that the footer starts with its links */
+  footer.closing .closing__cta { display: none; }
+  footer.closing > .wrap { row-gap: 0; }
+  footer.closing { padding-top: var(--s-8); }
+}
