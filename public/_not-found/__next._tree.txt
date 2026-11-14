@@ -1,0 +1,15 @@
+:HL["https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wdth,wght@75..100,400..600&display=swap","style"]
+:HL["/assets/system.css","style"]
+:HL["/assets/ui/cards.css","style"]
+:HL["/assets/motion/motion.css","style"]
+:HL["/assets/layout/layout.css","style"]
+:HL["/assets/icons/icon.css","style"]
+:HL["/site.css?v=mwghqomv","style"]
+:Hm"/assets/system.js"
+:Hm"/assets/motion/motion.js"
+:Hm"/assets/moments/moments.js"
+:Hm"/assets/moments/lib.js"
+:Hm"/assets/moments/pinned-chapters/moment.js"
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
+0:{"b":"bxB6Q5s8_K-mRq0wSF-8p","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

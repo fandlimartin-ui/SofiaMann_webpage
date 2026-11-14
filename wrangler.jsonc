@@ -1,0 +1,14 @@
+// Cloudflare Workers Static Assets: an assets-only Worker (no server code). Wrangler uploads the
+// files in ./public and Cloudflare serves them from the edge. Deployed by Workers Builds on each push
+// to main (deploy command: npx wrangler deploy).
+{
+  "name": "sofiamann-webpage",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./public",
+    // a path with no file shows the site's own 404 page
+    "not_found_handling": "404-page",
+    // /404.html and /404 both resolve; folders get their trailing slash
+    "html_handling": "auto-trailing-slash"
+  }
+}
