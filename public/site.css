@@ -145,13 +145,14 @@ main > section.g2#portfolio > .wrap, main > section.g2#editorial > .wrap {
    fills the rest of the first screen on a desktop). */
 main > section.hero.hero--mosaic {
   height: auto; min-height: 0;
-  padding: calc(var(--nav) + var(--s-7)) 0 var(--padb);
+  padding: var(--s-8) 0 var(--s-8);
 }
-.hero--mosaic .landing__head { display: grid; gap: var(--s-5); margin-bottom: var(--s-7); }
+.hero--mosaic .landing__head { display: grid; gap: var(--s-5); margin: 0; }
 .hero--mosaic h1 { margin: 0; font-size: clamp(44px, 11vw, 64px); line-height: .95; letter-spacing: -0.02em; }
 .hero--mosaic .landing__name { display: block; }
 .hero--mosaic .landing__comma { display: none; }
 .hero--mosaic .landing__role { display: block; margin-top: .3em; font-size: .42em; line-height: 1.1; color: var(--muted); letter-spacing: 0; }
+.hero--mosaic h1, .hero--mosaic .hero__lead { color: var(--ink); }
 .hero--mosaic .hero__lead { margin: 0 0 var(--s-5); max-width: 42ch; }
 
 /* ---------- Client chapters (pinned-chapters moment) ---------- */
@@ -399,20 +400,15 @@ html.lb-open { overflow: hidden; }
    ===================================================================================== */
 @media (min-width: 1024px) {
   /* ---- Landing: the name large on the left, the words and buttons on the right ---- */
-  main > section.hero.hero--mosaic { padding-top: calc(var(--nav) + var(--s-6)); }
+  main > section.hero.hero--mosaic { padding: var(--s-9) 0; }
   .hero--mosaic .landing__head {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 460px); column-gap: var(--s-8);
-    align-items: end; margin-bottom: var(--s-5);
+    align-items: end; margin: 0;
   }
   .hero--mosaic h1 { font-size: clamp(76px, 8.4vw, 150px); line-height: .88; }
   .hero--mosaic .landing__role { font-size: .3em; }
   .hero--mosaic .hero__lead { margin-bottom: var(--s-5); }
   .hero--mosaic .landing__side .btn-row { flex-wrap: nowrap; }
-  /* the photographs open the page; the name, words and buttons follow under the grid, before the
-     metro editorial (the markup keeps the name first for screen readers and search) */
-  main > section.hero.hero--mosaic > .wrap { display: flex; flex-direction: column; }
-  .hero--mosaic .hero__mosaic { order: 1; }
-  .hero--mosaic .landing__head { order: 2; margin: var(--s-9) 0 0; }
 
   /* ---- Magazine spreads: square photographs, tight gutters, larger headings ---- */
   .prows, .prow { gap: 12px; }

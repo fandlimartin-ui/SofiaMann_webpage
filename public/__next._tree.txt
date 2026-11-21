@@ -4,15 +4,12 @@
 :HL["/assets/motion/motion.css","style"]
 :HL["/assets/layout/layout.css","style"]
 :HL["/assets/icons/icon.css","style"]
-:HL["/site.css?v=mwq8kt9r","style"]
+:HL["/site.css?v=mwq8yeyh","style"]
 :Hm"/assets/system.js"
 :Hm"/assets/motion/motion.js"
 :Hm"/assets/moments/moments.js"
 :Hm"/assets/moments/lib.js"
 :Hm"/assets/moments/pinned-chapters/moment.js"
-:HL["/photos/gate-sofi00003-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00003-480.webp 480w, /photos/gate-sofi00003-960.webp 960w, /photos/gate-sofi00003-1440.webp 1440w, /photos/gate-sofi00003-2048.webp 2048w","imageSizes":"300px"}]
-:HL["/photos/gate-sofi00010-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00010-480.webp 480w, /photos/gate-sofi00010-960.webp 960w, /photos/gate-sofi00010-1440.webp 1440w, /photos/gate-sofi00010-2048.webp 2048w","imageSizes":"(max-width: 639px) 51vw, (max-width: 1440px) 34vw, 435px","fetchPriority":"high"}]
-:HL["/photos/gate-sofi00015-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00015-480.webp 480w, /photos/gate-sofi00015-960.webp 960w, /photos/gate-sofi00015-1440.webp 1440w, /photos/gate-sofi00015-2048.webp 2048w","imageSizes":"(max-width: 639px) 49vw, (max-width: 1440px) 33vw, 422px"}]
-:HL["/photos/gate-sofi00003-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00003-480.webp 480w, /photos/gate-sofi00003-960.webp 960w, /photos/gate-sofi00003-1440.webp 1440w, /photos/gate-sofi00003-2048.webp 2048w","imageSizes":"(max-width: 639px) 100vw, (max-width: 1440px) 33vw, 422px"}]
+:HL["/photos/gate-sofi00006-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00006-480.webp 480w, /photos/gate-sofi00006-960.webp 960w, /photos/gate-sofi00006-1440.webp 1440w, /photos/gate-sofi00006-2048.webp 2048w","imageSizes":"300px"}]
 1:[["children",{"s":"__PAGE__","h":160}]]
-0:{"b":"vlo9QlHs8FLeVeMRNJLRE","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"I3RV-krXGSVslAT1ob-WS","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
