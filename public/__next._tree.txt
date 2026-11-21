@@ -4,14 +4,15 @@
 :HL["/assets/motion/motion.css","style"]
 :HL["/assets/layout/layout.css","style"]
 :HL["/assets/icons/icon.css","style"]
-:HL["/site.css?v=mwq8a7bx","style"]
+:HL["/site.css?v=mwq8kt9r","style"]
 :Hm"/assets/system.js"
 :Hm"/assets/motion/motion.js"
 :Hm"/assets/moments/moments.js"
 :Hm"/assets/moments/lib.js"
 :Hm"/assets/moments/pinned-chapters/moment.js"
-:HL["/photos/vuch-vuch-10-960.webp","image",{"imageSrcSet":"/photos/vuch-vuch-10-480.webp 480w, /photos/vuch-vuch-10-960.webp 960w","imageSizes":"300px"}]
-:HL["/photos/prague-dsc5913-960.webp","image",{"imageSrcSet":"/photos/prague-dsc5913-480.webp 480w, /photos/prague-dsc5913-960.webp 960w, /photos/prague-dsc5913-1440.webp 1440w, /photos/prague-dsc5913-2048.webp 2048w","imageSizes":"(max-width: 639px) 100vw, (max-width: 1440px) 67vw, 858px","fetchPriority":"high"}]
-:HL["/photos/vuch-vuch-10-960.webp","image",{"imageSrcSet":"/photos/vuch-vuch-10-480.webp 480w, /photos/vuch-vuch-10-960.webp 960w","imageSizes":"(max-width: 639px) 100vw, (max-width: 1440px) 33vw, 422px"}]
+:HL["/photos/gate-sofi00003-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00003-480.webp 480w, /photos/gate-sofi00003-960.webp 960w, /photos/gate-sofi00003-1440.webp 1440w, /photos/gate-sofi00003-2048.webp 2048w","imageSizes":"300px"}]
+:HL["/photos/gate-sofi00010-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00010-480.webp 480w, /photos/gate-sofi00010-960.webp 960w, /photos/gate-sofi00010-1440.webp 1440w, /photos/gate-sofi00010-2048.webp 2048w","imageSizes":"(max-width: 639px) 51vw, (max-width: 1440px) 34vw, 435px","fetchPriority":"high"}]
+:HL["/photos/gate-sofi00015-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00015-480.webp 480w, /photos/gate-sofi00015-960.webp 960w, /photos/gate-sofi00015-1440.webp 1440w, /photos/gate-sofi00015-2048.webp 2048w","imageSizes":"(max-width: 639px) 49vw, (max-width: 1440px) 33vw, 422px"}]
+:HL["/photos/gate-sofi00003-960.webp","image",{"imageSrcSet":"/photos/gate-sofi00003-480.webp 480w, /photos/gate-sofi00003-960.webp 960w, /photos/gate-sofi00003-1440.webp 1440w, /photos/gate-sofi00003-2048.webp 2048w","imageSizes":"(max-width: 639px) 100vw, (max-width: 1440px) 33vw, 422px"}]
 1:[["children",{"s":"__PAGE__","h":160}]]
-0:{"b":"De6qC6LJqxoA4UlUmEWRk","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"vlo9QlHs8FLeVeMRNJLRE","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
