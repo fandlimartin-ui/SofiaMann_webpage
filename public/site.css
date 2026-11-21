@@ -1,6 +1,96 @@
 /* Page CSS for the portfolio. Everything else comes from the Taste Skill kit in /assets
    (system.css: tokens, grid, sections, nav, buttons, footer; layout.css: the hero; motion.css: hover). */
 
+/* ---------- Showreel: the opening film ----------
+   Shots crossfade with a slow camera move; a pair of portraits opens like a magazine spread. The
+   timing lives in ShowreelPlayer.tsx (4.2 s a shot); the moves run a little longer so they never stop
+   on screen. Under "reduce motion" nothing moves and the first shot stands. */
+main > section.reel {
+  position: relative; height: 100svh; min-height: 560px; padding: 0; margin: 0;
+  background: #120e0c; color: #efebe5; overflow: hidden; isolation: isolate;
+}
+.reel__stage { position: absolute; inset: var(--nav) 0 0 0; }
+.reel__shot {
+  position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 3px;
+  opacity: 0; z-index: 0; transition: opacity 1200ms cubic-bezier(.4, 0, .2, 1);
+}
+.reel__shot[data-on] { z-index: 1; }
+.reel__shot.is-active { opacity: 1; z-index: 2; }
+.reel__shot--pair { grid-template-columns: repeat(2, minmax(0, 1fr)); background: #120e0c; }
+.reel__panel { position: relative; overflow: hidden; min-width: 0; }
+.reel__img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  transform-origin: 50% 45%; will-change: transform; user-select: none;
+}
+.reel__shot[data-on] .reel__img { animation: 5600ms linear both; }
+.reel__shot[data-on][data-move="in"] .reel__img { animation-name: reel-in; }
+.reel__shot[data-on][data-move="out"] .reel__img { animation-name: reel-out; }
+.reel__shot[data-on][data-move="left"] .reel__img { animation-name: reel-left; }
+.reel__shot[data-on][data-move="right"] .reel__img { animation-name: reel-right; }
+.reel[data-paused] .reel__img, .reel[data-paused] .reel__panel { animation-play-state: paused !important; }
+@keyframes reel-in { from { transform: scale(1.12); } to { transform: scale(1); } }
+@keyframes reel-out { from { transform: scale(1); } to { transform: scale(1.1); } }
+@keyframes reel-left { from { transform: scale(1.1) translateX(2.4%); } to { transform: scale(1.1) translateX(-2.4%); } }
+@keyframes reel-right { from { transform: scale(1.1) translateX(-2.4%); } to { transform: scale(1.1) translateX(2.4%); } }
+/* a pair opens from the foot, the second page a beat later */
+.reel__shot--pair.is-active .reel__panel { animation: reel-wipe 1000ms cubic-bezier(.65, 0, .35, 1) both; }
+.reel__shot--pair.is-active .reel__panel + .reel__panel { animation-delay: 160ms; }
+@keyframes reel-wipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+.reel__shade {
+  position: absolute; inset: var(--nav) 0 0 0; z-index: 3; pointer-events: none;
+  background: linear-gradient(to top, rgba(14, 10, 8, .82) 0%, rgba(14, 10, 8, .35) 26%, rgba(14, 10, 8, 0) 50%);
+}
+.reel__overlay {
+  position: absolute; z-index: 4; left: 0; right: 0; bottom: 0; margin-inline: auto;
+  width: min(100% - 2 * var(--gut), 1280px); padding-bottom: clamp(16px, 3.4svh, 36px);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: var(--s-6); row-gap: var(--s-4);
+}
+.reel__title { min-width: 0; animation: reel-title 1600ms cubic-bezier(.22, 1, .36, 1) 250ms both; }
+@keyframes reel-title { from { opacity: 0; transform: translateY(24px); letter-spacing: .08em; } }
+.reel__name {
+  margin: 0; font-family: var(--font-display); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(44px, 8.2vw, 136px); line-height: .9; letter-spacing: .01em; color: #f4efe8;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, .25);
+}
+.reel__role { margin: var(--s-3) 0 0; font: 500 12px/1.4 var(--font-text); letter-spacing: .3em; text-transform: uppercase; color: rgba(244, 239, 232, .82); }
+.reel__controls { display: flex; align-items: center; gap: var(--s-4); }
+.reel__count { margin: 0; font: 500 13px/1 var(--font-text); letter-spacing: .12em; color: rgba(244, 239, 232, .7); font-variant-numeric: tabular-nums; }
+.reel__count span { color: #f4efe8; }
+.reel__btn {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 50%; cursor: pointer;
+  border: 1px solid rgba(244, 239, 232, .45); background: rgba(14, 10, 8, .25); color: #f4efe8;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+.reel__btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.reel__btn svg path[d^="M6.5"] { fill: currentColor; stroke: none; }
+@media (hover: hover) and (pointer: fine) { .reel__btn:hover { background: rgba(244, 239, 232, .14); border-color: #f4efe8; } }
+.reel__btn:focus-visible, .reel__seg:focus-visible, .reel__scroll:focus-visible { outline: 2px solid #f4efe8; outline-offset: 3px; }
+.reel__progress { grid-column: 1 / -1; display: flex; gap: 6px; }
+.reel__seg { flex: 1; min-width: 0; height: 20px; padding: 9px 0; border: 0; background: none; cursor: pointer; }
+.reel__seg-track { display: block; height: 2px; background: rgba(244, 239, 232, .28); overflow: hidden; }
+.reel__seg-fill { display: block; height: 100%; background: #f4efe8; transform: scaleX(0); transform-origin: left center; }
+.reel__seg.is-done .reel__seg-fill { transform: scaleX(1); }
+.reel__scroll {
+  position: absolute; right: 0; bottom: calc(100% + var(--s-5)); display: inline-flex; align-items: center; gap: var(--s-2);
+  min-height: 44px; color: rgba(244, 239, 232, .85); text-decoration: none;
+  font: 500 12px/1 var(--font-text); letter-spacing: .24em; text-transform: uppercase;
+}
+.reel__scroll svg { width: 12px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+@media (hover: hover) and (pointer: fine) { .reel__scroll:hover { color: #f4efe8; } }
+@media (max-width: 639px) {
+  .reel__overlay { grid-template-columns: minmax(0, 1fr); }
+  .reel__controls { position: absolute; right: 0; bottom: calc(100% + var(--s-4)); }
+  .reel__name { font-size: clamp(40px, 12.4vw, 64px); }
+  .reel__role { letter-spacing: .24em; }
+  .reel__progress { gap: 4px; }
+  .reel__scroll { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel__shot { transition: none; }
+  .reel__shot[data-on] .reel__img, .reel__shot--pair.is-active .reel__panel, .reel__title { animation: none; }
+}
+
 /* ---------- Photograph rows: one height per row, every photograph in its own proportions ---------- */
 .prows { display: grid; gap: var(--s-5); }
 .prow { display: flex; gap: var(--s-5); align-items: flex-start; }
