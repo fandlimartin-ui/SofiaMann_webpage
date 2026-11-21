@@ -1,4 +1,4 @@
-# Sofie Manová – portfolio
+# Sofie Mann – portfolio
 
 Built static site of the portfolio (HTML, CSS, JS and web-optimised photographs), served by
 Cloudflare Workers Static Assets at https://sofiamann-webpage.fandlimartin.workers.dev/
